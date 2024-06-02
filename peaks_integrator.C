@@ -18,7 +18,7 @@
 
 
   ifile.open(fileName+".txt", ios::in);  //extract data from txt file
-  while(!ifile.eof() && x<3000)
+  while(!ifile.eof() && x<xAxis->GetXmax())
   {
     ifile >> y;
     h1->Fill(x, y);  //x, x-weight
