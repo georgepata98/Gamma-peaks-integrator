@@ -7,14 +7,17 @@
 
   Double_t y;
   Int_t x=0, j;
+  TString fileName;
 
   cout << endl << "Choose:" << endl;
   cout << "1. Histogram visualization" << endl;
   cout << "2. Peaks integration" << endl;
   cin >> j;
   
+  cout << "Name of the input file: "; cin >> fileName;
 
-  ifile.open("data.txt", ios::in);  //extract data from file
+
+  ifile.open(fileName+".txt", ios::in);  //extract data from txt file
   while(!ifile.eof() && x<3000)
   {
     ifile >> y;
@@ -47,10 +50,12 @@
     Double_t x1, x2, integral, binWidth;
     Int_t num, polOrder, binStart, binStop;
 
-    cout << endl << "Enter the number of peaks you want to integrate: "; cin >> num;
+    cout << "Name of the output file: "; cin >> fileName;
+
+    cout << endl << "****************************************" << endl << "Enter the number of peaks you want to integrate: "; cin >> num;
 
 
-    ofile.open("odata.txt", ios::out);  //write data to file
+    ofile.open(fileName+".txt", ios::out);  //write data to txt file
     for(Int_t i=1; i<=num; i++)
     {
       cout << endl << "Select the order of the polynomial fit for the current peak: " << endl;
@@ -86,7 +91,7 @@
         cout << "Righthand background margin: " << endl;
         cout << "bg_3 = "; cin >> bg3;
         cout << "bg_4 = "; cin >> bg4;
-        TF1 *fitFunction = new TF1("fitFunction", "pol2", bg1, bg4);
+        TF1 *fitFunction = new TF1("fitFunction", "pol2", bg1, bg4);  //pol2 fit function from bg1 to bg4
         cout << "Peak interval you want to integrate: " << endl;
         cout << "x_1 = "; cin >> x1;
         cout << "x_2 = "; cin >> x2;
@@ -111,6 +116,11 @@
         gr1->Fit(fitFunction, "R");
         integral=integral-fitFunction->Integral(x1, x2);  //scadere background dat de functia de fit, pe intervalul (x1, x2)
         ofile << i << " " << bg1 << " " << bg2 << " " << bg3 << " " << bg4 << " " << x1 << " " << x2 << " " << integral << " " << TMath::Sqrt(integral) << endl;
+
+        
+        /*gr1->SetMarkerStyle(8);
+        gr1->Draw("AP");
+        fitFunction->Draw("SAME");*/
       }
     }
     ofile.close();
