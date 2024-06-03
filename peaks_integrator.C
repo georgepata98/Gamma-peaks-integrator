@@ -1,5 +1,6 @@
 {
   #include <vector>
+  #include <string>
 
   TH1D *h1 = new TH1D("h1", "histogram", 3000, 0., 3000.);  //nbins, x_min, x_max
   TAxis *xAxis = h1->GetXaxis();
@@ -137,7 +138,7 @@
     else if(!manualInput)
     {
       cout << "Name of the output file (where is the integration data): "; cin >> fileName;
-      string line;
+      std::string line;
       Int_t auxx=0;
 
       ofile.open(fileName+".txt", ios::in);
