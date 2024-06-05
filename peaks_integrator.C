@@ -143,7 +143,7 @@
 
       ofile.open(fileName+".txt", ios::in);
       if(!ofile) {
-        cout << endl << "Error: Unable to open file 'output.root'!" << endl;
+        cout << endl << "Error: Unable to open the file!" << endl;
         return 1;
       }
       while(std::getline(ofile, line))
