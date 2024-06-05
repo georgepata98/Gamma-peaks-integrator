@@ -142,10 +142,14 @@
       Int_t auxx=0;
 
       ofile.open(fileName+".txt", ios::in);
+      if(!ofile) {
+        cout << endl << "Error: Unable to open file 'output.root'!" << endl;
+        return 1;
+      }
       while(std::getline(ofile, line))
       {
         std::istringstream iss(line);
-        if(auxx==0)  //jump over the first line in the file
+        if(auxx==0)  //jump over the first line of the file
         {
           auxx=1;
           continue;
