@@ -20,6 +20,10 @@
 
 
   ifile.open(fileName+".txt", ios::in);  //extract data from txt file
+  if(!ifile) {
+    cout << endl << "Error: Unable to open the file!" << endl;
+    return 1;
+  }
   while(!ifile.eof() && x<xAxis->GetXmax())
   {
     ifile >> y;
